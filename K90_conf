@@ -37,3 +37,6 @@ eventnbr="/dev/input/event13"
 libnotify="1"
 #name of the application that is supposed to be running (is used to get DBUS_SESSION_BUS_ADDRESS)
 appli="firefox"
+
+#debug mode facilitates trace
+debug="1" # Debug mode (1 Enable - 0 Disable )

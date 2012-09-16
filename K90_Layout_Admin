@@ -1,0 +1,432 @@
+#!/bin/bash
+#######################################
+# Define custom layout functions here #
+#######################################
+# Choose keyboard mode: 
+# "Admin" for cron based or "Gaming" for real time commands
+layout="Admin"
+
+function f_MR {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=MR_-_Cancel
+	f_debug $fonction
+	f_libnotify 6000 "Corsair K90 $layout - $fonction" "Payload aborted"
+}
+function f_G01 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G01_-_HDD_INFO 
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Generating Complete Hard Drive Report" # Set your notify message here
+############################  Start of G1 script
+# This is the proper script that will be launched when G1 is hit.
+# This example generates a report on the hard drives - customize to your needs !!!
+	(echo "Report generated on $(date +%Y%m%d) at $(date +%R)";echo " ";echo "--------------------------------------------------------------------------------";echo " ") > $directory/$fonction.txt
+	(df -h;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
+	(cd /home/jupiter;du -h --max-depth=1;cd $directory;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
+	(/usr/sbin/smartctl -a /dev/sda;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
+	(/usr/sbin/smartctl -a /dev/sdb;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
+	(/usr/sbin/smartctl -a /dev/sdc;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
+	
+############################  End of G1 script
+	rm tmp/$fonction #Leave this rm, it is used by f_is_running
+}
+function f_G02 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G02_-_Restore_Fav
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Restoring Favourite Apps" # Set your notify message here
+# Script
+# This is the proper script that will be launched when G2 is hit - customize to your needs !!!
+# For each app in the list provided that is not detected as running, the script launches it for my $user : adapt with your favourites
+	for i in firefox yakuake filezilla dolphin xchat google-chrome amarok
+	do
+		pgrep $i || sudo -b -u $user env DISPLAY=:0 $i
+	done
+#######################################
+	rm tmp/$fonction  #Leave the rm, it is used by f_is_running
+}
+function f_G03 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G03_-_Play_Movie
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Playing most recent Movies" # Set your notify message here
+# Script
+#This one calls f_select_latest with extensions avi, mkv and mp4 in order to choose out of most recent files, then plays the selected one.
+	filetype="avi|mkv|mp4"
+	f_select_latest $filetype
+	if [ -f tmp/select ]; then
+		sudo -b -u $user env DISPLAY=:0 mplayer $(cat tmp/select) # I use mplayer, but any movie player should do
+	else
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "No movie selected - not playing"
+	fi
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+
+}
+function f_G04 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G04_-_Unused_So_Far
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Change this text" # Set your notify message here
+# Script
+	echo "put your script here"
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G05 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G05_-_Unused_So_Far
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Change this text" # Set your notify message here
+# Script
+	echo "your script comes here"
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+
+}
+function f_G06 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G06_-_Unused_So_Far
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Change this text" # Set your notify message here
+# Script
+	echo "your script comes here"
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G07 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G07_-_Test_Websites
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Testing websites" # Set your notify message here
+# Script
+# This example checks if a list of sites respond as expected.  List is formatted as "address;checkstring"
+	for i in "www.openskill.lu;Relooking et modernisation de sites existants" "www.adel-sprl.be;rassembler un maximum de savoir faire au service de nos clients afin"
+	do
+		address=$(echo "$i"|cut -f 1 -d";")
+		checkstring=$(echo "$i"|cut -f 2 -d";")
+		if [ "$(wget -q -O - "$address" | grep -E -o "$checkstring")" = "" ]; then
+			f_libnotify "10000" "Corsair K90 $layout - $fonction" "$address seems down"
+		fi
+	done
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G08 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G08_-_Backup_Server
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Starting Server Backup" # Set your notify message here
+# Script
+	rsync -qaEz -e "ssh -i /root/.ssh/id_rsa" root@prod.openskill.lu:/home/.users/68/jupiter/ $directory/backup/
+	f_libnotify 5000 "Corsair K90 $layout - $fonction" "Server Backup Complete"
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G09 {
+#I expect unexpected bugs on this key due to noise data it sends on another event
+	echo "I would try to avoid this key"
+}
+function f_G10 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+#This script flashes a .img file on an usb stick or sd card)
+# Be very carefull with this one as a wrong setting can cause massive data loss!
+# Again, be sure it's sdd you want to flash, inserting an extra device can easily change device name!
+	fonction=G10_-_dd_flash_USB
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Searching img files" # Set your notify message here
+# Script
+	filetype="img"
+	f_select_latest $filetype
+	if [ -f tmp/select ]; then
+		f_libnotify 5000 "!!! CONFIRMATION!!!" "Flash $(cat tmp/select) on /dev/sdd ???"
+		f_confirm $fonction
+		dd if=$(cat tmp/select) of=/dev/sdd
+		f_libnotify 5000 "Corsair K90 $layout - $fonction" "/dev/sdd has been flashed with $(cat tmp/select)"
+	fi
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G11 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G11_-_Android_Backup
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+# Script
+# Backups android phones manages many phones if required
+	mount /dev/sdd1 /mnt/usb
+# This function can handle many mobiles, to avoid Errors, I create a file manually on my mobile's SD root like this (this needs to be done once per mobile):
+# echo "Telephone_Model" > /mnt/usb/imyourmobile
+# Avoid spaces and weird characters. In my case, I have 3 mobiles backed-up that way, they just need a different model name in that file!
+	if [ "$(cat /mnt/usb/imyourmobile)" != "" ];then
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "Backupping phone and syncing music to phone" # Set your notify message here
+		model="$(cat /mnt/usb/imyourmobile)" #get's the model you defined for the phone
+		rsync -qa "/mnt/usb/dcim" "$directory/Android/$model" #Backs-up pictures
+		rsync -qa "/mnt/usb/clockworkmod" "$directory/Android/$model" #Backs up clockworkmod
+# Update The Music folder on your computer manually.  At the next sync, all that music will be synced to your android.  !!! Be sure to have enough space !!!
+		#rsync -qa --delete $directory/Android/$model/Music /mnt/usb/Music
+		umount /mnt/usb 
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "$model Backup Complete" # Set your notify message here
+	else
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "$model Backup Canceled - Either your phone isn't the right device, or you didn't create imyourmobile on the SD's root!"
+	fi
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+
+}
+function f_G12 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G12_-_Burn_CD
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+# Script
+# Burns a CD - Not thoroughly tested :s
+	filetype="iso"
+	f_select_latest $filetype
+	if [ -f tmp/select ]; then
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "Burning $(cat tmp/select)"
+		f_confirm $fonction
+		cdrecord -dao dev=2,0,0 $(cat tmp/select) && f_libnotify 3000 "Corsair K90 $layout - $fonction" "CD Has been burned" # Please, find the correct device identifier (dev=X.Y.Z) with "cdrecord -scanbus"
+	else
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "No iso detected, Not Burning"
+	fi
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G13 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G13_-_Switch_shm_NaCl
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+# Script
+#This one remounts /dev/shm with differnt rights, I need it to enable Native Client in Chrome
+# cfr http://code.google.com/p/nativeclient/issues/detail?id=1883
+	if [ "$(mount|grep shm|grep noexec)" != "" ]; then
+		mount -o remount,exec /dev/shm
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "shm remounted in EXEC mode (NaCl should run)"
+	else
+		mount -o remount,rw,nosuid,nodev,noexec,relatime /dev/shm
+		f_libnotify 3000 "Corsair K90 $layout - $fonction" "shm remounted in SECURE mode"
+	fi
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+}
+function f_G14 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G14_-_sync_repositories
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 2000 "Corsair K90 $layout - $fonction" "Syncing repositories..." # Set your notify message here
+# Script
+# Depends of your distribution
+emerge --sync && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositories synced, ready for upgrade"
+#apt-get update && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositories synced, ready for upgrade"
+#yum update && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositories synced, ready for upgrade"
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+}
+function f_G15 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G15_-_unused_so_far
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 2000 "Corsair K90 $layout - $fonction" "Your text here" # Set your notify message here
+# Script
+	echo "script goes here"
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+}
+function f_G16 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=G16_-_Cheat_Sheet
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+# Script
+	f_cheatsheet
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_G17 {
+	#USE WITH CAUTION... I experienced unexpected bugs on this key due to noise data sent on another event
+	echo "I would try to avoid this key"
+}
+function f_G18 {
+	#USE WITH CAUTION... I experienced unexpected bugs on this key due to noise data sent on another event
+	echo "I would try to avoid this key"
+}
+function f_M1 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=M1_-_Update_Kernel
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Checking Checksums" # Set your notify message here
+# Script
+#installs my new kernel (if different from the previous one
+#depends on sha512 for checksum
+	mount /boot && mount /boot/efi
+	oldchecksum=$(/usr/bin/sha512sum /boot/efi/EFI/gentoo/vmlinuz_new.efi|cut -f 1 -d" " )
+	newchecksum=$(/usr/bin/sha512sum /usr/src/linux/arch/x86_64/boot/bzImage|cut -f 1 -d" " )
+	if [ "$newchecksum" != "$oldchecksum" ]; then
+		echo "Checksums are different: updating"
+		DISPLAY=:0 notify-send -t 5000 "Corsair K90 $layout - $fonction" "Checksums are different, updating kernel" # Set your notify message here 
+		mv /boot/efi/EFI/gentoo/vmlinuz_new.efi /boot/efi/EFI/gentoo/vmlinuz_old.efi
+		mv /boot/efi/EFI/gentoo/vmlinuz_old.efi /boot/efi/EFI/gentoo/vmlinuz_old2.efi
+		cp /usr/src/linux/arch/x86_64/boot/bzImage /boot/efi/EFI/gentoo/vmlinuz_new.efi
+	else
+		
+		DISPLAY=:0 notify-send -t 3000 "Corsair K90 $layout - $fonction" "Checksums match, skipping kernel update" # Set your notify message here
+	fi
+	umount /boot/efi && umount /boot
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+}
+function f_M2 {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=M2_-_Restart_X
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify -t 3000 "Corsair K90 $layout - $fonction" "Restarting X" # Set your notify message here
+# Script
+	/etc/init.d/xdm restart
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_M3 {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=M3_-_Reboot
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Restarting System" # Set your notify message here
+	/sbin/shutdown -r now
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
+function f_Lock {
+# give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=Lock_-_Stop_SSH
+	f_debug $fonction
+	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
+	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	# End of Options
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "SSHD stopped" # Set your notify message here
+# Script
+	/etc/init.d/sshd stop
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+}
+function f_Unlock {
+ # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
+	fonction=Unlock_-_Start_SSH
+	f_debug $fonction
+	checkifrunning=0  #if set to 1, prevents this subscript from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
+	f_is_running $fonction
+	f_confirm $fonction
+	f_libnotify 3000 "Corsair K90 $layout - $fonction" "SSHD started" # Set custom notify message here
+#script
+	/etc/init.d/sshd restart
+#######################################
+	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+}
