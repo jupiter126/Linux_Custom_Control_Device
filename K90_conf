@@ -1,0 +1,39 @@
+#!/bin/bash
+#####################
+# V A R I A B L E S #
+#####################
+
+#Where is the cache file to be placed (I put it in RAM to avoid excessive HDD IO access)
+cachefile="/tmp/corsair_k90_getscancodes"
+
+#Which device event is your keyboard?  This might require a bit of trial and error to find out.
+#here's how I did, 
+#1. Look in /dev/input/by-path to find which events link to your keyboard (event-kbd)
+# ls -al /dev/input/by-path/
+#   	lrwxrwxrwx 1 root root  10 Sep  3 02:22 pci-0000:00:1a.0-usb-0:1.4:1.0-event-mouse -> ../event11
+#	lrwxrwxrwx 1 root root   9 Sep  3 02:22 pci-0000:00:1a.0-usb-0:1.4:1.0-mouse -> ../mouse0
+#	lrwxrwxrwx 1 root root  10 Sep  3 02:22 pci-0000:00:1a.0-usb-0:1.4:1.1-event-kbd -> ../event12
+#	lrwxrwxrwx 1 root root  10 Sep  3 02:22 pci-0000:00:1d.0-usb-0:1.8:1.0-event-kbd -> ../event13
+#	lrwxrwxrwx 1 root root  10 Sep  3 02:22 pci-0000:00:1d.0-usb-0:1.8:1.1-event -> ../event14
+#	lrwxrwxrwx 1 root root  10 Sep  3 02:22 pci-0000:00:1d.0-usb-0:1.8:1.2-event-kbd -> ../event15
+#2. Use getscancodes to try the different event interfaces and while it runs, hit some Gx buttons.
+#   Once you're on the right event, you should see some nice control codes (on Gx keys, not standard), corresponding to your keys like this:
+#	./getscancodes /dev/input/event13
+#	Input driver version is 1.0.1
+#	Input device ID: bus 0x3 vendor 0x1b1c product 0x1b02 version 0x111
+#	Input device name: "Corsair Corsair Vengeance K90 Keyboard"
+#	458960				#--> This is the code you're supposed to get for G1
+#	458960
+#	458961				#--> This is the code you're supposed to get for G2
+#	458961
+#If not, try another event ^^ - 
+#Once you found your correct event device, set this variable to the right value:
+eventnbr="/dev/input/event13"
+
+# Libnotify ?
+# If set on 1, the script will try to set DBUS_SESSION_BUS_ADDRESS, so that notifications are pushed trough OSD to the right user.
+# If set on 0, I should code some echo feedback for console use.
+# For this to work, you need to specify the username AND an application that that user is running in X.
+libnotify="1"
+#name of the application that is supposed to be running (is used to get DBUS_SESSION_BUS_ADDRESS)
+appli="firefox"
