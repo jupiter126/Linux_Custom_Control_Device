@@ -1,9 +1,0 @@
-Readme for K90 script
-
-I wrote this script to implement support for the programmable keys of a Corsair K90 Gaming keybord.
-
-The script now is a helpfull shortcut for system administration, as each of the keys is linked to a subscript (server backups, drive flashing, ...)
-
-By writing a corresponding bridge and slight tweaking, it should allow to use structured inputs from most kind of custom devices (mouses, sensors, ...)
-
-I tryed to explain everything in the main file when coding it, so please refer to that file for further information.
