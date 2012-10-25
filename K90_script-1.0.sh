@@ -151,7 +151,7 @@ echo "Timer is at $seconds seconds and repeats every $delay until 60"
 #####################
 # V A R I A B L E S #
 #####################
-
+# Variables should now be set in K90_conf
 if [ -f K90_conf ]; then
 	source K90_conf
 else 

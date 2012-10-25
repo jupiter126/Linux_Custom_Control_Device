@@ -6,8 +6,8 @@ if [ ! -f $directory/activelayout ]; then #if 	activelayout is not set, set it t
 	echo Admin > $directory/activelayout
 fi
 activelayout="$(cat $directory/activelayout)" && source $directory/K90_Layout_$activelayout && $include $directory/K90_Layout_$activelayout # This is where we set the activelayout, load its variables and functions
-if [ -f K90_conf ]; then #check and load config, print error if does not exist
-	source K90_conf
+if [ -f $directory/K90_conf ]; then #check and load config, print error if does not exist
+	source $directory/K90_conf
 else 
 	echo "K90_conf.txt not found, please set a conf file!"
 fi
@@ -28,13 +28,13 @@ if [ "x$libnotify" = "x1" ]; then #get DBUS_SESSION_BUS_ADDRESS
 	dbus=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$pid/environ | sed 's/DBUS_SESSION_BUS_ADDRESS=//' )
 	DBUS_SESSION_BUS_ADDRESS=$dbus
 fi
-if [ ! -f getscancodes ]; then #check for getscancodes binary - try to compile it if not found
+if [ ! -f $directory/getscancodes ]; then #check for getscancodes binary - try to compile it if not found
 	echo "getscancodes binary not detected in $directory, attempting automatic compilation" && DISPLAY=:0 notify-send -t 4000 "getscancodes binary not detected in $directory" 'Attempting automatic compilation'
-	if [ -d getscancodes-1.0-modified ]; then
-		cd "getscancodes-1.0-modified"
+	if [ -d $directory/getscancodes-1.0-modified ]; then
+		cd "$directory/getscancodes-1.0-modified"
 		if [ "$(which gcc|grep -v which)" != "" ] && [ "$(which make|grep -v which)" != "" ]; then
 			make
-			if [ -f getscancodes ]; then
+			if [ -f $directory/getscancodes ]; then
 				echo "Compilation successfull, moving binary to running directory" && DISPLAY=:0 notify-send -t 5000 "Compilation successfull" 'moving binary to running directory'
 				mv getscancodes $directory
 				cd $directory

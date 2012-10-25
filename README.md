@@ -111,6 +111,18 @@ k90-test
 
 #	1.5 --> 1.6	- cleaen up the code & comments (again :s)
 #			- added some functions with tee, making it easier to get the input
+#	1.6 --> 1.7     - Thanks to Nuxien for code review!
+#			- renamed $layout to $keybmode to avoid confusion - $keybmode is defined in the layout file itself.
+#			- cleaning and coherence checking for all the changes made so far since 1.0, corrected a few typos
+#			- removed .sh extension to avoid potential issues
+#			- Made a blank layout
+#			- Corrected some egrep functions
+#			- Fixed $user issues
+#			- 
+#			- adapt create and switch functions to new layout system
+#	1.7 --> 1.8	- corrected create and switch functions to new layout system for real this time!
+#			- added "list" argument to get list of layouts
+#			- corrected a few checks in the getscancodes compilation process
 
 #############
 # U S A G E #
