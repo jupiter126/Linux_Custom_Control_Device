@@ -3,7 +3,7 @@ k90-test
 ###########################
 # I N T R O D U C T I O N #
 ###########################
-# This little script is a dirty quickhack by me (JuPiTeR)-(really, 4 days of noobswork - it is literally the second script of more than 50 lines that I write), 
+# This little script is a dirty quickhack by me (JuPiTeR)-(it is literally the second script of more than 50 lines that I write), 
 # and can certainly be enhanced in at least a 100 possible manners: if you can do better, please do so!
 
 # It is its own readme, please read the file thoroughly, including comments; I tried to put as many as possible.
@@ -54,8 +54,7 @@ k90-test
 ###########
 # T O D O #
 ###########
-#- Go on Holliday \o/
-#- Find how I emulate a sequence of keys? not sure (xmacro or xsendkeycode), and send it to a running game? --> the missing link to version 1.0
+# Rewrite getscancodes so it passes the codes directly to the script instead of passing trough a cache file.
 
 ###########
 # B U G S #
@@ -123,6 +122,9 @@ k90-test
 #	1.7 --> 1.8	- corrected create and switch functions to new layout system for real this time!
 #			- added "list" argument to get list of layouts
 #			- corrected a few checks in the getscancodes compilation process
+#	1.8 --> 1.9	- Fixed an issue with initcache, and implemented f_initcache reset
+#			- Tested xsendkeycode so emulate keystrokes - it works great 
+#			- Thanks to r2d290 for constructive feedback - fixed a few bugs
 
 #############
 # U S A G E #
