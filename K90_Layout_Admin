@@ -301,7 +301,8 @@ emerge --sync && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositorie
 }
 function f_G15 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
-	fonction=G15_-_unused_so_far
+# This is the function you want to base upon for gaming mode.
+	fonction=G15_-_send_programmed_keycode_to
 	f_debug $fonction
 	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
 	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
@@ -311,7 +312,30 @@ function f_G15 {
 	f_confirm $fonction
 	f_libnotify 2000 "Corsair K90 $layout - $fonction" "Your text here" # Set your notify message here
 # Script
-	echo "script goes here"
+        for i in 43 26 46 46 32 65 25 32 27 46 40    # for each keycode in list
+        do
+                DISPLAY=:0 xsendkeycode $i 1 # send key press (1)
+                DISPLAY=:0 xsendkeycode $i 0 # send key release (0)
+        done
+
+#NOTE: you could also write it like
+#DISPLAY=:0 xsendkeycode 43 1
+#DISPLAY=:0 xsendkeycode 43 0
+#DISPLAY=:0 xsendkeycode 26 1
+#DISPLAY=:0 xsendkeycode 26 0
+#DISPLAY=:0 xsendkeycode 46 1
+#DISPLAY=:0 xsendkeycode 46 0
+#DISPLAY=:0 xsendkeycode 46 1
+#DISPLAY=:0 xsendkeycode 46 0
+#DISPLAY=:0 xsendkeycode 32 1
+#DISPLAY=:0 xsendkeycode 32 0
+#.........
+#it is much longer, but allows interesting combos... press shift, press control, press A, release A, release control, release shift, ...
+
+
+# Keycodes can be found on the Wiki:  https://github.com/jupiter126/Linux_Custom_Control_Device/wiki/keycodes-for-xsendkeycode
+# Please note keycodes slightlty vary depending on your keyboard layout (azerty, qwerty, ...)
+
 #######################################
 	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
 }
