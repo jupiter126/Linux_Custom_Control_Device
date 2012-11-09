@@ -45,6 +45,7 @@ with
 This change is allready applied to the source I hereby provide, it allows to redirect it's output (changed the way it buffers), thus to collect the scancodes in a text file.
 
 ## Changelog
+A line means it is incompatible with previous versions
 -----------------------------------------------
 	0.1 --> 0.5  	- Defining a logic, finding keycodes, testing stuff, ...
 	0.6 -->		- Core debugging + first functiunnalities implemented:
@@ -109,24 +110,24 @@ This change is allready applied to the source I hereby provide, it allows to red
 			- Renamed from K90 to Linux Custom Control Device
 			- Remade readme a bit
 
-## T O D O 
+## Todo 
 
 - Implement multiple device support (partially done)
 
-## B U G S 
+## Bugs 
 
 - When catching the custom keys, 3 of the 18 make some noise on the primary channel: these are G9 G17 and G18.  There's not much I can think of to solve this issue, so the best option in my opinion is not to use them. (G17 does play/pause and G18 stop on Amarok)
-
 - I think sometimes the keyboard sends the lock/unlock signal without my hitting the key (I can see the OSD information)
-
 - Certainly many more bugs :p
 
-## U S A G E 
+## Usage 
 
 ./getscancodes /dev/event/inputXX
 
 ## Options
 
-./LCCD_core.sh create ProfileName : Create a blank profile named "ProfileName" (avoid spaces and special characters in profile name)
+./LCCD_core.sh create ProfileName 
+Create a blank profile named "ProfileName" (avoid spaces and special characters in profile name)
 
-./LCCD_core.sh switch : Switch to next profile (we're not limited to 3 profiles, so create an extra profile rather than editing the blank one.)
+./LCCD_core.sh switch# 
+Switch to next profile (we're not limited to 3 profiles, so create an extra profile rather than editing the blank one.)
