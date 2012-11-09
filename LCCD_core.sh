@@ -9,6 +9,7 @@ activelayout="$(cat $directory/activelayout)"
 if [ ! -f  $directory/LCCD_Layout_$activelayout ]; then
 	echo $(ls $directory/ |grep "LCCD_Layout_"|grep -v "~"|head -n1|cut -f 3 -d"_") > $directory/activelayout #If active layout is set to a non existing one, set it to an existing one
 fi
+activelayout="$(cat $directory/activelayout)"
 source $directory/LCCD_Layout_$activelayout && $include $directory/LCCD_Layout_$activelayout # This is where we set the activelayout, load its variables and functions
 if [ -f $directory/LCCD_conf ]; then #check and load config, print error if does not exist
 	source $directory/LCCD_conf
