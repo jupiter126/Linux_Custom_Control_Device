@@ -5,6 +5,7 @@
 # Choose keyboard mode: 
 # "Admin" for cron based or "Gaming" for real time commands
 keybmode="Admin"
+delay=15 # When used with cron, the script will be run every $delay seconds
 
 function f_MR {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"

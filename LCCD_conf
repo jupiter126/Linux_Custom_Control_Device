@@ -39,4 +39,4 @@ libnotify="1"
 appli="firefox"
 
 #debug mode facilitates trace
-debug="1" # Debug mode (1 Enable - 0 Disable )
+debug="0" # Debug mode (1 Enable - 0 Disable )

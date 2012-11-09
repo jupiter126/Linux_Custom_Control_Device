@@ -2,9 +2,11 @@
 #######################################
 # Define custom layout functions here #
 #######################################
-# Choose keyboard mode: 
+# Choose keyboard mode:
 # "Admin" for cron based or "Gaming" for real time commands
 layout="Admin"
+delay=15 # When used with cron, the script will be run every $delay seconds
+device="Corsair K90"
 
 function f_MR {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -14,7 +16,7 @@ function f_MR {
 }
 function f_G01 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
-	fonction=G01_-_HDD_INFO 
+	fonction=G01_-_HDD_INFO
 	f_debug $fonction
 	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
 	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
@@ -32,9 +34,11 @@ function f_G01 {
 	(/usr/sbin/smartctl -a /dev/sda;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
 	(/usr/sbin/smartctl -a /dev/sdb;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
 	(/usr/sbin/smartctl -a /dev/sdc;echo " ";echo "--------------------------------------------------------------------------------";echo " ") >> $directory/$fonction.txt
-	
 ############################  End of G1 script
-	rm tmp/$fonction #Leave this rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G02 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -55,7 +59,10 @@ function f_G02 {
 		pgrep $i || sudo -b -u $user env DISPLAY=:0 $i
 	done
 #######################################
-	rm tmp/$fonction  #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G03 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -78,8 +85,10 @@ function f_G03 {
 		f_libnotify 3000 "Corsair K90 $layout - $fonction" "No movie selected - not playing"
 	fi
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
-
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G04 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -95,7 +104,10 @@ function f_G04 {
 # Script
 	echo "put your script here"
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G05 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -111,8 +123,10 @@ function f_G05 {
 # Script
 	echo "your script comes here"
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
-
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G06 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -128,7 +142,10 @@ function f_G06 {
 # Script
 	echo "your script comes here"
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G07 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -143,7 +160,7 @@ function f_G07 {
 	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Testing websites" # Set your notify message here
 # Script
 # This example checks if a list of sites respond as expected.  List is formatted as "address;checkstring"
-	for i in "www.openskill.lu;Relooking et modernisation de sites existants" "www.adel-sprl.be;rassembler un maximum de savoir faire au service de nos clients afin"
+	for i in "www.openskill.lu;Relooking et modernisation de sites existants"
 	do
 		address=$(echo "$i"|cut -f 1 -d";")
 		checkstring=$(echo "$i"|cut -f 2 -d";")
@@ -152,7 +169,10 @@ function f_G07 {
 		fi
 	done
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G08 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -169,7 +189,10 @@ function f_G08 {
 	rsync -qaEz -e "ssh -i /root/.ssh/id_rsa" root@prod.openskill.lu:/home/.users/68/jupiter/ $directory/backup/
 	f_libnotify 5000 "Corsair K90 $layout - $fonction" "Server Backup Complete"
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G09 {
 #I expect unexpected bugs on this key due to noise data it sends on another event
@@ -199,7 +222,10 @@ function f_G10 {
 		f_libnotify 5000 "Corsair K90 $layout - $fonction" "/dev/sdd has been flashed with $(cat tmp/select)"
 	fi
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G11 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -230,32 +256,29 @@ function f_G11 {
 		f_libnotify 3000 "Corsair K90 $layout - $fonction" "$model Backup Canceled - Either your phone isn't the right device, or you didn't create imyourmobile on the SD's root!"
 	fi
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
-
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G12 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
-	fonction=G12_-_Burn_CD
+	fonction=G12_-_Confirm
 	f_debug $fonction
 	# Start of options  ------------------>  FILL THESE TWO LINES FOR EACH KEY !!!
-	checkifrunning=1  #if set to 1, prevents this script from running twice at the same time
-	mustconfirm=1     #if set to 1, this action will require you to push a key to confirm the action.
+	checkifrunning=0  #if set to 1, prevents this script from running twice at the same time
+	mustconfirm=0     #if set to 1, this action will require you to push a key to confirm the action.
 	# End of Options
 	f_is_running $fonction
 	f_confirm $fonction
 # Script
-# Burns a CD - Not thoroughly tested :s
-	filetype="iso"
-	f_select_latest $filetype
-	if [ -f tmp/select ]; then
-		f_libnotify 3000 "Corsair K90 $layout - $fonction" "Burning $(cat tmp/select)"
-		f_confirm $fonction
-		cdrecord -dao dev=2,0,0 $(cat tmp/select) && f_libnotify 3000 "Corsair K90 $layout - $fonction" "CD Has been burned" # Please, find the correct device identifier (dev=X.Y.Z) with "cdrecord -scanbus"
-	else
-		f_libnotify 3000 "Corsair K90 $layout - $fonction" "No iso detected, Not Burning"
-	fi
+# Confirms
+	echo "1" > $directory/tmp/check
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G13 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -278,7 +301,10 @@ function f_G13 {
 		f_libnotify 3000 "Corsair K90 $layout - $fonction" "shm remounted in SECURE mode"
 	fi
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G14 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -297,7 +323,10 @@ emerge --sync && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositorie
 #apt-get update && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositories synced, ready for upgrade"
 #yum update && f_libnotify 2000 "Corsair K90 $layout - $fonction" "Repositories synced, ready for upgrade"
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G15 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -312,6 +341,7 @@ function f_G15 {
 	f_confirm $fonction
 	f_libnotify 2000 "Corsair K90 $layout - $fonction" "Your text here" # Set your notify message here
 # Script
+# your distro might ship with xmacro instead of xsendkeycodes.
         for i in 43 26 46 46 32 65 25 32 27 46 40    # for each keycode in list
         do
                 DISPLAY=:0 xsendkeycode $i 1 # send key press (1)
@@ -337,7 +367,10 @@ function f_G15 {
 # Please note keycodes slightlty vary depending on your keyboard layout (azerty, qwerty, ...)
 
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G16 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -352,7 +385,10 @@ function f_G16 {
 # Script
 	f_cheatsheet
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_G17 {
 	#USE WITH CAUTION... I experienced unexpected bugs on this key due to noise data sent on another event
@@ -386,12 +422,15 @@ function f_M1 {
 		mv /boot/efi/EFI/gentoo/vmlinuz_old.efi /boot/efi/EFI/gentoo/vmlinuz_old2.efi
 		cp /usr/src/linux/arch/x86_64/boot/bzImage /boot/efi/EFI/gentoo/vmlinuz_new.efi
 	else
-		
+
 		DISPLAY=:0 notify-send -t 3000 "Corsair K90 $layout - $fonction" "Checksums match, skipping kernel update" # Set your notify message here
 	fi
 	umount /boot/efi && umount /boot
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_M2 {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -407,7 +446,10 @@ function f_M2 {
 # Script
 	/etc/init.d/xdm restart
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_M3 {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -422,7 +464,10 @@ function f_M3 {
 	f_libnotify 3000 "Corsair K90 $layout - $fonction" "Restarting System" # Set your notify message here
 	/sbin/shutdown -r now
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_Lock {
 # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -438,7 +483,10 @@ function f_Lock {
 # Script
 	/etc/init.d/sshd stop
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running	
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
 function f_Unlock {
  # give $fonction an understandable name and use "_-_" --> This is used for "cheatsheet"
@@ -452,5 +500,8 @@ function f_Unlock {
 #script
 	/etc/init.d/sshd restart
 #######################################
-	rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	echo "done"
+	if [ -f tmp/$fonction ]; then
+		rm tmp/$fonction #Leave the rm, it is used by f_is_running
+	fi
 }
