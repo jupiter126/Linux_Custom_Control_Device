@@ -6,7 +6,7 @@ A 100 enhancements are certainly possible, if you have ideas, please push patche
 It is its own readme, please read the file thoroughly, including comments; I tried to put as many as possible.
 You might want to try the wiki for more example ^^
 
-# R I G H T S  A N D  R E S P O N S A B I L I T I E S 
+## Rights and responsabilities 
 
 By using this program, you agree to all of the following
 - getscancodes is published under GPL V2 (Like Marvin Raaijmakers' original source).  
@@ -45,7 +45,7 @@ with
 This change is allready applied to the source I hereby provide, it allows to redirect it's output (changed the way it buffers), thus to collect the scancodes in a text file.
 
 # C h a n g e l o g 
-
+-----------------------------------------------
 Day 1: 0.1 --> 0.5 - defining a logic, finding keycodes, testing stuff, ...
 Day 2: 0.6 -- core debugging + first functiunnalities implemented:
 		- Mute: switches the extended keyboard on/off
