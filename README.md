@@ -1,27 +1,28 @@
-k90-test
-========
+# Linux Custom Control Device (LCCD)
+==================================
+
 This little scripts objective is to support of some custom keyboards and mouses in linux.
 A 100 enhancements are certainly possible, if you have ideas, please push patches ;)
 It is its own readme, please read the file thoroughly, including comments; I tried to put as many as possible.
 You might want to try the wiki for more example ^^
 
-R I G H T S  A N D  R E S P O N S A B I L I T I E S 
+# R I G H T S  A N D  R E S P O N S A B I L I T I E S 
 
 By using this program, you agree to all of the following
 - getscancodes is published under GPL V2 (Like Marvin Raaijmakers' original source).  
 - It is released under BSD licence
 - I assume no responsabilities whatsoever for the consequences of running this program on your computer, it runs on mine, I share it, and it is your sole reponsability to use it.
 
-R E Q U I R E D  F I L E S :
-LCCD_core.sh : the core script
-LCCD_conf: The base configuration file
-LCCD_Layout_Blank: A blank layout (used by create function*)
-LCCD_Layout_Admin: An example admin config
-getscancodes-1.0-modified/getscancodes.c - getscancodes sources
-getscancodes-1.0-modified/getscancodes.o - getscancodes sources
-getscancodes-1.0-modified/Makefile - getscancodes makefile
+# R E Q U I R E D  F I L E S :
+LCCD_core.sh : the core script<br />
+LCCD_conf: The base configuration file<br />
+LCCD_Layout_Blank: A blank layout (used by create function*)<br />
+LCCD_Layout_Admin: An example admin config<br />
+getscancodes.c - getscancodes sources<br />
+getscancodes.o - getscancodes sources<br />
+Makefile - getscancodes makefile<br />
 
-D E P E N D A N C I E S 
+# D E P E N D A N C I E S 
 
   - To simulate keypresses, use either xmacro or xsendkeycodes, depending on your distribution.
   
@@ -43,7 +44,7 @@ with
 	char buf[8]; sprintf(buf, "%d\n", ev[i].value); write(1, buf, sizeof(buf)); fsync(1);
 This change is allready applied to the source I hereby provide, it allows to redirect it's output (changed the way it buffers), thus to collect the scancodes in a text file.
 
-C h a n g e l o g 
+# C h a n g e l o g 
 
 Day 1: 0.1 --> 0.5 - defining a logic, finding keycodes, testing stuff, ...
 Day 2: 0.6 -- core debugging + first functiunnalities implemented:
@@ -99,17 +100,19 @@ Day 4: 0.8--> 0.9999 	- Include the switch function in the script, to emulate or
 	1.8 --> 1.9	- Fixed an issue with initcache, and implemented f_initcache reset
 			- Tested xsendkeycode so emulate keystrokes - it works great 
 			- Thanks to r2d290 for constructive feedback - fixed a few bugs
-	1.9 --> 2.0	- Cleaned github
-			- renamed from K90 to Linux Custom Control Device
-			- remade readme
+-----------------------------------------------
+	1.9 --> 2.0	- Changed getscancodes.c buffer (finally) - this version is not compatible with the previous ones
+			- Thanks to nuxien for the c fix ;)
+			- Cleaned github
+			- Cleaned the code a lot
+			- Renamed from K90 to Linux Custom Control Device
+			- Remade readme a bit
 
+# T O D O 
 
-T O D O 
+- Implement multiple device support (partially done)
 
-- Rewrite getscancodes so it passes the codes directly to the script instead of passing trough cron and a cache file (I need help on that one).
-- Implement multiple device support
-
-B U G S 
+# B U G S 
 
 - When catching the custom keys, 3 of the 18 make some noise on the primary channel: these are G9 G17 and G18.  There's not much I can think of to solve this issue, so the best option in my opinion is not to use them. (G17 does play/pause and G18 stop on Amarok)
 
@@ -117,28 +120,12 @@ B U G S
 
 - Certainly many more bugs :p
 
-U S A G E 
+# U S A G E 
 
-I use this script mostly as a shortcut for common system administration, rather than as a gaming keyboard, I thus appreciate the possibility to cancel some strikes before they are executed.
-This is why I set the cron on a 15 seconds rather than per second.  If you plan to uss the "Reactivity Boost" option
+./getscancodes /dev/event/inputXX
 
-use "crontab -e" to add a job to cron (this script)
-Example:
-* * * * * /home/yourhome/K90_linux/K90_script.sh
-This runs the /home/yourhome/K90_linux/K90_script.sh script every minute
-NB: This should be done as root, else getscancodes will not have sufficient rights to access /dev/input/event[XX]
-- Modified getscancodes outputs the codes from /dev/input/event[XX] in a text file
-- Every time the script is run (cron)
-	- Checks the last line of text file
-	- For the associated key, parse the $isrunning and $confirm vars
-	- If conditions are met, launch corresponding script
+# Options
 
-Options
-K90_script.sh create ProfileName : Create a blank profile named "ProfileName" (avoid spaces and special characters in profile name)
-K90_script.sh switch : Switch to next profile (we're not limited to 3 profiles, so create an extra profile rather than editing the blank one.)
+./LCCD_core.sh create ProfileName : Create a blank profile named "ProfileName" (avoid spaces and special characters in profile name)
 
-
-REACTIVITY BOOST 
-
-As long as getscancodes is not rewritten for real time usage, I rely on the "delay" variable at the start of the layout.
-For a layout used for a game, consider lowering the delay to enhance responsivity (consider delay=1)
+./LCCD_core.sh switch : Switch to next profile (we're not limited to 3 profiles, so create an extra profile rather than editing the blank one.)
