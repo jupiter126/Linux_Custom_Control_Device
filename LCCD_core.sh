@@ -162,7 +162,6 @@ exit
 function f_cheatsheet { # Generates a list of the functions available in currently active config, based on _-_
 fonction=f_cheatsheet
 f_debug $fonction
-#f_libnotify 12000 "CheatSheet for $activelayout layout" "$(cat $(ls -a|grep "$activelayout" |cut -f2 -d">")|grep "_-_"|grep -v cheatsheet|cut -f2 -d"=")"
 f_libnotify 12000 "CheatSheet for $activelayout layout" "$(cat $(ls -a|grep "$activelayout" |grep -v "~"|cut -f2 -d">")|grep "_-_"|grep -v cheatsheet|cut -f2 -d"=")"
 }
 # End of declarations, program "entry point"
