@@ -362,9 +362,14 @@ function f_G15 {
 #.........
 #it is much longer, but allows interesting combos... press shift, press control, press A, release A, release control, release shift, ...
 
-
 # Keycodes can be found on the Wiki:  https://github.com/jupiter126/Linux_Custom_Control_Device/wiki/keycodes-for-xsendkeycode
 # Please note keycodes slightlty vary depending on your keyboard layout (azerty, qwerty, ...)
+
+# With debian/ubuntu, lineakd is not available, so use xmacro (apt-get install xmacro)
+# first use xmacrorec2 to record a macro --> $ xmacrorec2 > my.macro
+# my macro should be in the same directory as the script
+# then add this line instead of the for loop used with xsendkeycodes
+# cat $directory/my.macro | xmacroplay ":0.0"
 
 #######################################
 	echo "done"
