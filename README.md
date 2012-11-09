@@ -13,7 +13,7 @@ By using this program, you agree to all of the following
 - It is released under BSD licence
 - I assume no responsabilities whatsoever for the consequences of running this program on your computer, it runs on mine, I share it, and it is your sole reponsability to use it.
 
-# R E Q U I R E D  F I L E S :
+## Required Files
 LCCD_core.sh : the core script<br />
 LCCD_conf: The base configuration file<br />
 LCCD_Layout_Blank: A blank layout (used by create function*)<br />
@@ -22,7 +22,7 @@ getscancodes.c - getscancodes sources<br />
 getscancodes.o - getscancodes sources<br />
 Makefile - getscancodes makefile<br />
 
-# D E P E N D A N C I E S 
+## Dependancies
 
   - To simulate keypresses, use either xmacro or xsendkeycodes, depending on your distribution.
   
@@ -44,30 +44,30 @@ with
 	char buf[8]; sprintf(buf, "%d\n", ev[i].value); write(1, buf, sizeof(buf)); fsync(1);
 This change is allready applied to the source I hereby provide, it allows to redirect it's output (changed the way it buffers), thus to collect the scancodes in a text file.
 
-# C h a n g e l o g 
+## Changelog
 -----------------------------------------------
-Day 1: 0.1 --> 0.5 - defining a logic, finding keycodes, testing stuff, ...
-Day 2: 0.6 -- core debugging + first functiunnalities implemented:
-		- Mute: switches the extended keyboard on/off
-	  	- G1: make a hard disk checkup
-		- G2: Launch all favourite apps
-		- G13: Launch most recent [avi,mkv,mp4] in /home/jupiter/Downloads/
-		- M1: update kernel
-		- M2: restart X
-		- M3: restart computer
-		- Lock/Unlock: stop/restart sshd
-Day 3: 0.7 --> 0.8 - core changes + more functiunnalities implemented
-		- added f_select_latest - that allows to select the most recent files of a certain type.
-		- Now G13 allows to launch the most recent movie between a choice of 4 folders.
-		- Remapped the keys
-		- Check periodic info (Test Website)
-		- Backup Server
-		- Flash Raspberry pi image on SD
-		- Sync Android microSD
-		- remount shm with exec
-		- f_notify and echo support
-		- Cleanups, cleanups, cleanups, ... 
-Day 4: 0.8--> 0.9999 	- Include the switch function in the script, to emulate original M1 M2 M3 behaviour
+	0.1 --> 0.5  	- Defining a logic, finding keycodes, testing stuff, ...
+	0.6 -->		- Core debugging + first functiunnalities implemented:
+			- Mute: switches the extended keyboard on/off
+	  		- G1: make a hard disk checkup
+			- G2: Launch all favourite apps
+			- G13: Launch most recent [avi,mkv,mp4] in /home/jupiter/Downloads/
+			- M1: update kernel
+			- M2: restart X
+			- M3: restart computer
+			- Lock/Unlock: stop/restart sshd
+	0.7 --> 0.8 	- core changes + more functiunnalities implemented
+			- added f_select_latest - that allows to select the most recent files of a certain type.
+			- Now G13 allows to launch the most recent movie between a choice of 4 folders.
+			- Remapped the keys
+			- Check periodic info (Test Website)
+			- Backup Server
+			- Flash Raspberry pi image on SD
+			- Sync Android microSD
+			- remount shm with exec
+			- f_notify and echo support
+			- Cleanups, cleanups, cleanups, ... 
+	0.8--> 0.9999 	- Include the switch function in the script, to emulate original M1 M2 M3 behaviour
 			- Include Speedup factor to make responsivity better for games
 			- Include profile create option
 			- Switched to UTF8 (forgot to setup kate in new OS installation)
@@ -75,9 +75,10 @@ Day 4: 0.8--> 0.9999 	- Include the switch function in the script, to emulate or
 			- Cheatsheet
 			- Cleanups, cleanups, cleanups, and optimized code a bit (tnx again Kon)
 -----------------------------------------------
-	0.9999 RC3 --> 1.0	Thanks to Hell4You for code review and improvement hints!
+	0.9999 --> 1.0	- Thanks to Hell4You for code review and improvement hints!
 			- Changed $directory from user determined variable to auto detection
-			- Changed $user from user determined variable to auto detection, though couldn't get the recommended ${USER} method to do the trick
+			- Changed $user from user determined variable to auto detection, though couldn't get the recommended 
+			  ${USER} method to do the trick
 			- Got the variables in a external config file
 
 	1.0 --> 1.5	- Got the layouts in functions and put them in a separate file
@@ -108,11 +109,11 @@ Day 4: 0.8--> 0.9999 	- Include the switch function in the script, to emulate or
 			- Renamed from K90 to Linux Custom Control Device
 			- Remade readme a bit
 
-# T O D O 
+## T O D O 
 
 - Implement multiple device support (partially done)
 
-# B U G S 
+## B U G S 
 
 - When catching the custom keys, 3 of the 18 make some noise on the primary channel: these are G9 G17 and G18.  There's not much I can think of to solve this issue, so the best option in my opinion is not to use them. (G17 does play/pause and G18 stop on Amarok)
 
@@ -120,11 +121,11 @@ Day 4: 0.8--> 0.9999 	- Include the switch function in the script, to emulate or
 
 - Certainly many more bugs :p
 
-# U S A G E 
+## U S A G E 
 
 ./getscancodes /dev/event/inputXX
 
-# Options
+## Options
 
 ./LCCD_core.sh create ProfileName : Create a blank profile named "ProfileName" (avoid spaces and special characters in profile name)
 
