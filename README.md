@@ -16,8 +16,9 @@ By using this program, you agree to all of the following
 ## Required Files
 LCCD_core.sh : the core script<br />
 LCCD_conf: The base configuration file<br />
-LCCD_Layout_Blank: A blank layout (used by create function*)<br />
-LCCD_Layout_Admin: An example admin config<br />
+LCCD_Layout_K90_Blank: A blank layout (used by create function*)<br />
+LCCD_Layout_K90_Admin: An example admin config<br />
+LCCD_Triggers_K90 - file with the triggers that bind K90 keys<br />
 getscancodes.c - getscancodes sources<br />
 getscancodes.o - getscancodes sources<br />
 Makefile - getscancodes makefile<br />
