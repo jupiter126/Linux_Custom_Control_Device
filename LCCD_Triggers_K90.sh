@@ -54,5 +54,5 @@ elif [ $1 = "cheatsheet" ] || [ $1 = "458975" ]; then
         f_G16
         exit
 else
-        echo 'Unknown Argument.'
+        echo "Unknown Argument: $1"
 fi

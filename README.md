@@ -109,10 +109,10 @@ A line means it is incompatible with previous versions
 			- Cleaned the code a lot
 			- Renamed from K90 to Linux Custom Control Device
 			- Remade readme a bit
+	2.0 --> 2.1	- Added support for various devices
 
 ## Todo 
 
-- Implement multiple device support (partially done)
 
 ## Bugs 
 

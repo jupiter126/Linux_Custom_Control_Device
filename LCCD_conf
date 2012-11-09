@@ -28,7 +28,7 @@ cachefile="/tmp/corsair_k90_getscancodes"
 #	458961
 #If not, try another event ^^ - 
 #Once you found your correct event device, set this variable to the right value:
-eventnbr="/dev/input/event13"
+# eventnbr="/dev/input/event13"
 
 # Libnotify ?
 # If set on 1, the script will try to set DBUS_SESSION_BUS_ADDRESS, so that notifications are pushed trough OSD to the right user.
