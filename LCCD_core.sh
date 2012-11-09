@@ -1,4 +1,5 @@
 #!/bin/bash
+#v3.1.1
 directory="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  #determine script $directory and the user that should be notified
 mkdir -p $directory/tmp
 user=$(echo $directory|cut -d"/" -f3) # Works as long as script is stored in /home/user/whatever/ - #user="${SUDO_USER}" #name of the user that must be notified --> returns empty  #user="${USER}" #name of the user that must be notified --> returns root
@@ -136,6 +137,7 @@ else
 	o=$[ ( $o + 1 ) ]
 	echo "$(ls $directory|grep "LCCD_Layout_"|grep -v "~"|head -n "$o"|tail -n 1|cut -f3 -d "_")" > $directory/activelayout
 fi
+activelayout="$(cat $directory/activelayout)"
 f_libnotify 3000 "Keyboard Switch" "$(cat $directory/activelayout) Enabled"
 exit
 }

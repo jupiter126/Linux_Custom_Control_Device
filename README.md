@@ -104,14 +104,14 @@ A line means it is incompatible with previous versions
 			- Tested xsendkeycode so emulate keystrokes - it works great 
 			- Thanks to r2d290 for constructive feedback - fixed a few bugs
 -----------------------------------------------
-	1.9 --> 2.0	- Changed getscancodes.c buffer (finally) - this version is not compatible with the previous ones
+	1.9 --> 3.0	- Changed getscancodes.c buffer (finally) - this version is not compatible with the previous ones
 			- Thanks to nuxien for the c fix ;)
 			- Cleaned github
 			- Cleaned the code a lot
 			- Renamed from K90 to Linux Custom Control Device
 			- Remade readme a bit
-	2.0 --> 2.1	- Added support for various devices
-
+	3.0 --> 3.1	- Added support for various devices
+	3.1 --> 3.1.1   - Corrected a bug by load layout one extra time
 ## Todo 
 
 
