@@ -423,8 +423,8 @@ function f_M1 {
 	if [ "$newchecksum" != "$oldchecksum" ]; then
 		echo "Checksums are different: updating"
 		DISPLAY=:0 notify-send -t 5000 "Corsair K90 $layout - $fonction" "Checksums are different, updating kernel" # Set your notify message here 
-		mv /boot/efi/EFI/gentoo/vmlinuz_new.efi /boot/efi/EFI/gentoo/vmlinuz_old.efi
 		mv /boot/efi/EFI/gentoo/vmlinuz_old.efi /boot/efi/EFI/gentoo/vmlinuz_old2.efi
+		mv /boot/efi/EFI/gentoo/vmlinuz_new.efi /boot/efi/EFI/gentoo/vmlinuz_old.efi
 		cp /usr/src/linux/arch/x86_64/boot/bzImage /boot/efi/EFI/gentoo/vmlinuz_new.efi
 	else
 

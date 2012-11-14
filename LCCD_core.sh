@@ -68,7 +68,7 @@ fi
 }
 function f_confirm { # Confirm that you want to start a function (rsync, ...) - I linked it with G12
 if [ "x$mustconfirm" = "x1" ]; then
-	echo "" > $directory/tmp/check
+	>$directory/tmp/check
 	f_libnotify 5000 "$device $layout - $fonction Confirmation Required" "You have 5 seconds to press G12 to confirm"
 	sleep 5 
 	if [ "$(cat $directory/tmp/check)" != "1" ]; then #This is the code for G12
